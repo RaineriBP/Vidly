@@ -57,14 +57,15 @@ else
         $(document).ready(function () {
             var table = $("#movies").DataTable({
                 ajax: {
-                    url: "/api/movies",
+                    url: "/api/GetMovies",
                     dataSrc:""
                 },
-                columns: [
+                columns:
+                [
                     {
                         data: "name",
                         render: function (data, type, movie) {
-                            return "<a href='/movies/edit/" + movie.id + "'>" + movie.name + "</a>";
+                            return "<a href='/Movies/edit/" + movie.id + "'>" + movie.name + "</a>";
                         }
                     },
                     {
@@ -75,13 +76,12 @@ else
                         render: function (data) {
                             return "<button class='btn-link js-delete' data-movie-id=" + data + ">Delete</button>";
                         }
-                     }
+                    }
                 ]
-            });
+            }); 
 
             $('#movies').on("click", ".js-delete", function () {
                 var button = $(this);
-
                 bootbox.confirm("Are you sure that you want to Delete this movie?", function (Result) {
                     if (Result) {
                         $.ajax({
